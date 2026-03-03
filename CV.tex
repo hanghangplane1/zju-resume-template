@@ -1,4 +1,4 @@
-\documentclass[11pt]{article}
+\documentclass[10pt]{article}
 
 \setlength{\parindent}{0pt}
 \usepackage{xltxtra}
@@ -35,38 +35,38 @@
 
 \usepackage[
     a4paper,
-    left=1.2cm,
-    right=1.2cm,
-    top=1.5cm,
-    bottom=1cm,
+    left=1.0cm,
+    right=1.0cm,
+    top=1.2cm,
+    bottom=0.8cm,
     nohead
 ]{geometry}
 
-\renewcommand{\baselinestretch}{1.5}
+\renewcommand{\baselinestretch}{1.2}
 
 \usepackage{titlesec}
 \usepackage{enumitem}
 \setlist{noitemsep}
-\setlist[itemize]{topsep=0.25em, leftmargin=*}
-\setlist[enumerate]{topsep=0.25em, leftmargin=*}
+\setlist[itemize]{topsep=0.1em, leftmargin=*}
+\setlist[enumerate]{topsep=0.1em, leftmargin=*}
 
 \newlength{\interProjectSpacing}
-\setlength{\interProjectSpacing}{0.9em}
+\setlength{\interProjectSpacing}{0.4em}
 \newcommand{\projectsep}{\vspace{\interProjectSpacing}}
 
 \newlength{\intraProjectTitleSep}
-\setlength{\intraProjectTitleSep}{0.4em}
+\setlength{\intraProjectTitleSep}{0.15em}
 \newcommand{\titlebreak}{\\[\intraProjectTitleSep]}
 
 \newlength{\intraProjectListTopSep}
-\setlength{\intraProjectListTopSep}{0.2em}
+\setlength{\intraProjectListTopSep}{0.05em}
 
 \titleformat{\section}
 {\large\bfseries\raggedright}
 {}{0em}
 {}
 [{\color{CVBlue}\titlerule}]
-\titlespacing*{\section}{0cm}{*1.6}{*1.2}
+\titlespacing*{\section}{0cm}{*0.8}{*0.6}
 
 
 \begin{document}
@@ -79,18 +79,19 @@
     \node[anchor = north west] at ($(current page.north west)+(0.5cm,+1.0cm)$) {\includegraphics[height=6cm]{zju.png}};
 \end{tikzpicture}%
 
+\vspace{-0.4cm}
 \centerline{\LARGE\bfseries{张宇航}}
+\vspace{0.1em}
 \centerline{\normalsize{\faPhone\ 130-9832-9363 \quad \faEnvelopeO\ \href{mailto:yuhang3.25@intl.zju.edu.cn}{yuhang3.25@intl.zju.edu.cn}}}
 
 
 \section{\makebox[\widthof{\faGraduationCap}][c]{\color{CVBlue}\faGraduationCap}\ 教育经历}
 
-\textbf{浙江大学} \quad 国际联合学院 \quad 结构工程 \hfill 2025.09 -- 至今\\[0.3em]
-\begin{itemize}[nosep]
+\textbf{浙江大学} \quad 国际联合学院 \quad 结构工程 \hfill 2025.09 -- 至今
+\begin{itemize}[nosep, topsep=0pt]
     \item 主修课程：具身智能，人工智能算法与系统，人工智能理论和高级应用，AI 赋能：创新思维引领下的产品设计
 \end{itemize}
-
-\vspace{0.4em}
+\vspace{0.2em}
 \textbf{长安大学} \quad 未来交通学院 \quad 土木工程 \hfill 2021.09 -- 2025.06
 
 
