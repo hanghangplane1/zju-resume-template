@@ -8,7 +8,6 @@
 \urlstyle{tt}
 \usepackage{xcolor}
 \definecolor{CVBlue}{RGB}{23,110,191}
-\definecolor{SepGray}{RGB}{160,160,160}
 \usepackage{calc}
 \usepackage{graphicx}
 \usepackage{tikz}
@@ -43,7 +42,7 @@
     nohead
 ]{geometry}
 
-\renewcommand{\baselinestretch}{1.28}
+\renewcommand{\baselinestretch}{1.22}
 
 \usepackage{titlesec}
 \usepackage{enumitem}
@@ -52,7 +51,7 @@
 \setlist[enumerate]{topsep=0.15em, leftmargin=*}
 
 \newlength{\interProjectSpacing}
-\setlength{\interProjectSpacing}{0.6em}
+\setlength{\interProjectSpacing}{0.55em}
 \newcommand{\projectsep}{\vspace{\interProjectSpacing}}
 
 \newlength{\intraProjectTitleSep}
@@ -62,15 +61,12 @@
 \newlength{\intraProjectListTopSep}
 \setlength{\intraProjectListTopSep}{0.1em}
 
-% 教育经历分隔符
-\newcommand{\edusep}{\textcolor{SepGray}{\enspace\textbar\enspace}}
-
 \titleformat{\section}
 {\large\bfseries\raggedright}
 {}{0em}
 {}
 [{\color{CVBlue}\titlerule}]
-\titlespacing*{\section}{0cm}{*1.0}{*1.0}
+\titlespacing*{\section}{0cm}{*1.0}{*0.9}
 
 
 \begin{document}
@@ -91,12 +87,18 @@
 
 \section{\makebox[\widthof{\faGraduationCap}][c]{\color{CVBlue}\faGraduationCap}\ 教育经历}
 
-\textbf{浙江大学}（985/C9）\edusep 国际联合学院 \edusep 结构工程 \hfill 2025.09 -- 至今
+\noindent\makebox[6.0cm][l]{\textbf{浙江大学}（985/C9）}%
+\makebox[3.5cm][l]{国际联合学院}%
+\makebox[2.8cm][l]{结构工程}%
+工学硕士 \hfill 2025.09 -- 至今
 \begin{itemize}[nosep, topsep=0.1em]
     \item 主修课程：具身智能，人工智能算法与系统，人工智能理论和高级应用，AI 赋能：创新思维引领下的产品设计
 \end{itemize}
 \vspace{0.3em}
-\textbf{长安大学}（211/双一流学科）\edusep 未来交通学院 \edusep 土木工程 \hfill 2021.09 -- 2025.06
+\noindent\makebox[6.0cm][l]{\textbf{长安大学}（211/双一流学科）}%
+\makebox[3.5cm][l]{未来交通学院}%
+\makebox[2.8cm][l]{土木工程}%
+工学学士 \hfill 2021.09 -- 2025.06
 
 
 \section{\makebox[\widthof{\faUsers}][c]{\color{CVBlue}\faUsers}\ 项目经历}
@@ -128,7 +130,7 @@
 \section{\makebox[\widthof{\faTrophy}][c]{\color{CVBlue}\faTrophy}\ 荣誉奖项}
 \begin{itemize}[nosep]
     \item 美国大学生数学建模大赛 \hfill \textbf{国际二等奖}
-    \item 第七届全国高校智能交通创新与创业大赛 \hfill \textbf{国家级一等奖}
+    \item "海信杯"第七届全国高校智能交通创新与创业大赛 \hfill \textbf{国家级一等奖}
     \item 第 15 届中国大学生计算机设计大赛 \hfill \textbf{国家级三等奖}
     \item 第 16 届全国大学生数学竞赛 \hfill \textbf{省级一等奖}
 \end{itemize}
