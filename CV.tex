@@ -1,6 +1,5 @@
 \documentclass[11pt]{article}
 
-
 \setlength{\parindent}{0pt}
 \usepackage{xltxtra}
 \usepackage{hyperref}
@@ -16,31 +15,24 @@
 \usepackage{fontspec}
 \usepackage{xeCJK}
 \usepackage{enumitem}
-\CJKsetecglue{} %% 取消中文与数字之间的间隙
+\CJKsetecglue{}
 
-
-%% 主文档字体设置
 \setmainfont[
     Path = fonts/Main/,
     Extension = .otf,
-    BoldFont = texgyretermes-bold.otf, % 加粗字体
-]{texgyretermes-regular.otf} % 正文字体
+    BoldFont = texgyretermes-bold.otf,
+]{texgyretermes-regular.otf}
 
-% 中文字体设置
 \setCJKmainfont[
     Path = fonts/hansans/,
     Extension = .ttf,
-    BoldFont = NotoSansSC-Bold.ttf, % 加粗字体
-]{NotoSansSC-Regular.otf} % 正文字体
-
+    BoldFont = NotoSansSC-Bold.ttf,
+]{NotoSansSC-Regular.otf}
 
 \usepackage{relsize}
 \usepackage{xspace}
+\usepackage{fontawesome}
 
-% 使用 fontawesome（部分图标）
-\usepackage{fontawesome} 
-
-% A4纸，上下左右边距
 \usepackage[
     a4paper,
     left=1.2cm,
@@ -50,106 +42,100 @@
     nohead
 ]{geometry}
 
-\renewcommand{\baselinestretch}{1.5} % 行间距设为1.5
+\renewcommand{\baselinestretch}{1.5}
 
 \usepackage{titlesec}
 \usepackage{enumitem}
-\setlist{noitemsep} % 取消列表项间的额外间距
-%\setlist{nosep} % 取消所有垂直间距
+\setlist{noitemsep}
 \setlist[itemize]{topsep=0.25em, leftmargin=*}
 \setlist[enumerate]{topsep=0.25em, leftmargin=*}
 
-% --- 用于控制【不同项目之间】的垂直距离 ---
 \newlength{\interProjectSpacing}
-\setlength{\interProjectSpacing}{0.9em} % <--- 在此调整项目之间的距离
+\setlength{\interProjectSpacing}{0.9em}
 \newcommand{\projectsep}{\vspace{\interProjectSpacing}}
 
-% --- 用于控制【项目标题】与下方【项目描述】的距离 ---
 \newlength{\intraProjectTitleSep}
-\setlength{\intraProjectTitleSep}{0.4em} % <--- 在此调整标题和描述的距离
+\setlength{\intraProjectTitleSep}{0.4em}
 \newcommand{\titlebreak}{\\[\intraProjectTitleSep]}
 
-% --- 用于控制【项目描述】与下方【要点列表】的距离 ---
 \newlength{\intraProjectListTopSep}
-\setlength{\intraProjectListTopSep}{0.2em} % <--- 在此调整描述和列表的距离
+\setlength{\intraProjectListTopSep}{0.2em}
 
-% =======================================================================
-
-
-\titleformat{\section}         % 定制 \section 命令 
-{\large\bfseries\raggedright} % 将 section 标题设置为大号、粗体且左对齐
-{}{0em}                      % 可用于为所有 section 添加前缀（如“章节...”）
-{}                           % 可用于在标题前插入代码
-[{\color{CVBlue}\titlerule}]  % 在标题后插入一条横线
+\titleformat{\section}
+{\large\bfseries\raggedright}
+{}{0em}
+{}
+[{\color{CVBlue}\titlerule}]
 \titlespacing*{\section}{0cm}{*1.6}{*1.2}
-
 
 
 \begin{document}
 \pagenumbering{gobble}
 
-%%%% 利用tikz来定位照片
-\begin{tikzpicture}[remember picture, overlay] 
+\begin{tikzpicture}[remember picture, overlay]
     \node[anchor = north east] at ($(current page.north east)+(-2cm,-1.2cm)$) {\includegraphics[height=3cm]{avatar.jpg}};
-  \end{tikzpicture}%
-  %%%% 利用tikz来定位学校Logo，这里只在第一页显示
-  \begin{tikzpicture}[remember picture, overlay] 
+\end{tikzpicture}%
+\begin{tikzpicture}[remember picture, overlay]
     \node[anchor = north west] at ($(current page.north west)+(0.5cm,+1.0cm)$) {\includegraphics[height=6cm]{zju.png}};
-  \end{tikzpicture}%
-\centerline{\LARGE\bfseries{胡豆}} 
+\end{tikzpicture}%
 
-\centerline{\normalsize{\faPhone\ 111-1111-1111 \quad \faEnvelopeO\ \href{mailto:3230100000@zju.edu.cn}{3230100000@zju.edu.cn}}} 
+\centerline{\LARGE\bfseries{张宇航}}
+\centerline{\normalsize{\faPhone\ 130-9832-9363 \quad \faEnvelopeO\ \href{mailto:yuhang3.25@intl.zju.edu.cn}{yuhang3.25@intl.zju.edu.cn}}}
 
-\centerline{\normalsize{\faGithubSquare\ \href{https://github.com/maksymilan}{https://github.com/maksymilan} \quad \faRssSquare\ \href{https://maksymilan.github.io/}{https://maksymilan.github.io}}} 
-    
-\section{\makebox[\widthof{\faGraduationCap}][c]{\color{CVBlue}\faGraduationCap}\ 教育背景}    
-\textbf{浙江大学} \hfill 2023.9 -- 至今\\[0.5em] % 标题和正文间加一点距离
-CC98烂坑挖掘工程与技术\quad 大二 
+
+\section{\makebox[\widthof{\faGraduationCap}][c]{\color{CVBlue}\faGraduationCap}\ 教育经历}
+
+\textbf{浙江大学} \quad 国际联合学院 \quad 结构工程 \hfill 2025.09 -- 至今\\[0.3em]
 \begin{itemize}[nosep]
-    \item 相关课程：《烂坑挖掘及基础》、《高级挖坑技巧》、《烂坑数理统计》
+    \item 主修课程：具身智能，人工智能算法与系统，人工智能理论和高级应用，AI 赋能：创新思维引领下的产品设计
 \end{itemize}
+
+\vspace{0.4em}
+\textbf{长安大学} \quad 未来交通学院 \quad 土木工程 \hfill 2021.09 -- 2025.06
+
 
 \section{\makebox[\widthof{\faUsers}][c]{\color{CVBlue}\faUsers}\ 项目经历}
 
-% --- 第一个项目 ---
-% 将标题行末尾的 \\ 替换为 \titlebreak 命令
-\textbf{98烂坑风控与可视化作战平台} \hfill 2024.08 -- 至今 \titlebreak
-项目描述：为维护cc98社区的讨论纯度、净化“心灵之约”版块风气，本项目旨在对“烂坑”进行科学、严谨的量化分析，并引入\textbf{大语言模型(LLM)}对烂坑帖进行\textbf{自动化情感极性与“离谱指数”标注}。
-% 在 itemize 的选项中，使用 topsep=\intraProjectListTopSep 来控制上边距
+% --- 项目一 ---
+\textbf{全离线 RAG 智能座舱语音交互系统} \hfill 2024.XX -- 2024.XX \titlebreak
+项目简介：针对无网络环境（车载/工业场景），设计并实现全离线智能语音交互系统。采用微服务架构将 ASR、RAG、LLM、TTS 四个模块解耦为独立进程，通过 ZeroMQ 异步通信实现语音输入→知识检索→大模型推理→语音播报的完整闭环。
 \begin{itemize}[nosep, topsep=\intraProjectListTopSep]
-    \item \textbf{数据与后端}：运用 \textbf{Go} 语言及 \textbf{GORM} 框架，实现对全站“烂坑”帖的7x24小时全天候\textbf{抓取}与\textbf{入库}(MySQL)。
-    \item \textbf{可视化前端}：采用原生 \textbf{HTML/CSS/JS} 构建了“烂坑”实时监控\textbf{作战大屏}。实现了坑主成分分析、挖坑热力图、年度烂坑王榜单等\textbf{可视化图表}，并通过 \textbf{AJAX} 异步刷新，确保数据洞察的实时性。
-    \item \textbf{核心产出}：全面掌握了从\textbf{数据采集、清洗、LLM标注到可视化分析}的“反烂坑”全链路技术。
+    \item \textbf{流式 ASR}：集成 Sherpa-ONNX + Zipformer 流式模型，基于 PortAudio 异步回调采集音频；调整 VAD 端点检测阈值（默认 1.2s→0.4s）降低首响应时延；设计 ASR-TTS 互斥机制避免 TTS 播报时的回声误触发
+    \item \textbf{端侧 RAG}：通过 Pybind11 嵌入 Python 调用 text2vec 实现向量检索；部署规则引擎进行查询分类（紧急/事实/创意），紧急指令直通知识库跳过 LLM 推理实现快速响应
+    \item \textbf{LLM 推理}：基于 Ollama 部署 DeepSeek-R1 1.5B（Q4 量化）模型，通过 libcurl 调用 HTTP Streaming API 实现流式推理；设计按中文标点分句的伪流式传输协议，每完成一句立即发送 TTS，降低用户感知的首句等待时间
+    \item \textbf{并发 TTS}：基于生产者-消费者模型构建文本/音频双缓冲队列，将语音合成与音频播放分离到独立线程实现流水线并行，消除 LLM 逐句输出时的语音卡顿
+    \item \textbf{通信与工程化}：封装 ZeroMQ REQ-REP 为三层继承体系（基类 + Server/Client），四模块独立进程实现故障隔离；全程 RAII + unique\_ptr 管理资源，CMake 统一构建多模块依赖
 \end{itemize}
 
-% 使用 \projectsep 命令来分隔两个项目
 \projectsep
 
-% --- 第二个项目 ---
-\textbf{AIGC驱动的超进化自动挖坑机 (Agent)} \hfill 2025.02 -- 至今 \titlebreak
-项目描述：为探索心灵版规的边界，以及测试版主锁沉反应速度的极限，本项目基于\textbf{多智能体协作(MCP)与LLM}技术，开发了一款能\textbf{自主“挖坑”与“互坑”}的AI Agent。
+% --- 项目二 ---
+\textbf{基于 A2A 协议的 C++ 多 Agent 通信 SDK} \hfill 2025.10 -- 2025.12 \titlebreak
+项目简介：基于 C++17 独立实现 Google A2A（Agent-to-Agent）协议的完整 SDK，利用阿里百炼平台提供的 Agent 构建多 Agent 通信系统验证协议准确性。同时利用 Redis 分布式存储对话历史保证上下文记忆，通过 tcpdump 抓包与 Wireshark 分析验证通信流程与协议格式的正确性。
 \begin{itemize}[nosep, topsep=\intraProjectListTopSep]
-    \item \textbf{并发与调度}：后端采用 \textbf{Go} 语言，充分利用 \textbf{Goroutine} 和 \textbf{Channel} 的高并发模型，模拟\textbf{用户并发在线}，执行定时挖坑，确保挖坑行动的\textbf{隐蔽性}与\textbf{高效性}。
-    \item \textbf{实时监控与响应}：运用 \textbf{WebSocket} 协议实现了对目标帖子的\textbf{实时监听与交互}。确保在烂坑被识破的第一时间，Agent能光速完成\textbf{“lktp”}或\textbf{反向钓鱼}操作，展现出极高的AI博弈能力。
-    \item \textbf{可视化GUI}：前端使用 \textbf{React} 框架构建了\textbf{后台管理的可视化面板 (Admin Panel)}。可一键下达挖坑指令、动态调整Agent的\textbf{指令}、并实时监控数据。
+    \item \textbf{A2A 协议实现}：使用 JSON-RPC 2.0 构建 A2A 通信消息格式，支持 message/send（一次性返回）与 message/stream（流式逐步返回）两种消息模式；定义完整数据模型体系，包括信息模型（Agent 身份与能力描述）、消息模型（单轮/多轮对话消息传递）、任务模型（长时任务状态追踪与多次返回）
+    \item \textbf{服务注册发现与意图路由}：实现注册中心，Agent 启动时主动注册元信息与能力标签，支持按标签快速查找与轮询负载均衡，后台心跳线程定期健康检查自动剔除故障节点；Orchestrator 接收用户请求后调用 LLM 进行意图识别，自动路由至对应 Agent 处理
+    \item \textbf{Client/Server 分层接口}：a2a\_client 提供客户端 API，支持同步/异步消息发送与 SSE 流式轮询；a2a\_server 提供任务生命周期管理与状态追踪存储，定义 ITaskStore 抽象接口并基于 Redis 扩展实现分布式 TaskStore，支持跨进程对话历史共享与上下文记忆
+    \item \textbf{多 Agent 编排落地}：基于阿里百炼平台部署 Orchestrator 与 Math Agent 为独立进程，完成"用户请求→意图识别→服务发现→Agent 调用→结果存储→返回用户"完整闭环；通过 contextId 实现跨进程多轮对话上下文连续推理
 \end{itemize}
 
-\section{\makebox[\widthof{\faCogs}][c]{\color{CVBlue}\faCogs}\ 技术栈}
+
+\section{\makebox[\widthof{\faTrophy}][c]{\color{CVBlue}\faTrophy}\ 荣誉奖项}
 \begin{itemize}[nosep]
-    \item \textbf{编程语言：} \textbf{Go}, Python, C++
-    \item \textbf{开发工具：} SSH, Git, Vim, MakeFile,LaTex
-    \item \textbf{操作系统：} Linux
+    \item 美国大学生数学建模大赛 \textbf{国际二等奖}
+    \item "海信杯"第七届全国高校智能交通创新与创业大赛 \textbf{国家级一等奖}
+    \item 第 15 届中国大学生计算机设计大赛 \textbf{国家级三等奖}
+    \item 第 16 届全国大学生数学竞赛 \textbf{省级一等奖}
 \end{itemize}
-\section{\makebox[\widthof{\faGraduationCap}][c]{\color{CVBlue}\faList}\ 获奖情况}
-\begin{itemize}
-    \item CC98年度用户 \hfill 2023.12
-    
+
+
+\section{\makebox[\widthof{\faCogs}][c]{\color{CVBlue}\faCogs}\ 专业技能}
+\begin{itemize}[nosep]
+    \item 熟练掌握 C++ 11，熟悉面向对象三大特性、STL 常用容器，熟悉智能指针、RAII、右值引用与移动语义、Lambda 表达式等 Modern C++ 特性
+    \item 熟悉 TCP/IP 协议栈，掌握 TCP 三次握手/四次挥手、TCP 与 UDP 区别、滑动窗口与拥塞控制；了解 IO 多路复用（select/poll/epoll）及 Socket 编程
+    \item 熟悉 Linux 系统编程，理解进程与线程区别、虚拟内存机制、进程间通信方式
+    \item 了解 RAG（检索增强生成）技术，了解 Embedding 向量化、余弦相似度检索等相关实现
+    \item 了解设计模式（生产者-消费者、工厂模式、RAII、单例模式），有实际项目落地经验
 \end{itemize}
-    
-\section{\makebox[\widthof{\faInfo}][c]{\color{CVBlue}\faInfo}\ 其他}
-\begin{itemize}[parsep=0.5ex]
-    \item \textbf{技术博客：} \href{https://maksymilan.github.io/}{https://maksymilan.github.io/}
-    \item \textbf{GitHub：} \href{https://github.com/maksymilan}{https://github.com/maksymilan} 
-    \item \textbf{英语水平：} CET-4, CET-6
-\end{itemize}
+
 \end{document}
