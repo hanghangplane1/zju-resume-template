@@ -79,7 +79,7 @@
     \node[anchor = north west] at ($(current page.north west)+(0.5cm,+1.0cm)$) {\includegraphics[height=6cm]{zju.png}};
 \end{tikzpicture}%
 
-\vspace{-0.2cm}
+\vspace{0cm}
 \centerline{\LARGE\bfseries{张宇航}}
 \vspace{0.2em}
 \centerline{\normalsize{\faPhone\ 130-9832-9363 \quad \faEnvelopeO\ \href{mailto:yuhang3.25@intl.zju.edu.cn}{yuhang3.25@intl.zju.edu.cn} \quad \faBriefcase\ 求职意向：\textbf{C++开发工程师}}}
@@ -118,7 +118,7 @@
 
 % --- 项目二 ---
 \textbf{基于 A2A 协议的 C++ 多 Agent 通信 SDK} \hfill 2025.10 -- 2025.12 \titlebreak
-项目简介：基于 C++17 独立实现 Google A2A（Agent-to-Agent）协议的完整 SDK，利用阿里百炼平台提供的 Agent 构建多 Agent 通信系统验证协议准确性。同时利用 Redis 分布式存储对话历史保证上下文记忆，通过 tcpdump 抓包与 Wireshark 分析验证通信流程与协议格式的正确性。
+项目简介：基于 C++ 独立实现 Google A2A（Agent-to-Agent）协议的完整 SDK，利用阿里百炼平台提供的 Agent 构建多 Agent 通信系统验证协议准确性。同时利用 Redis 分布式存储对话历史保证上下文记忆，通过 tcpdump 抓包分析验证通信流程与协议格式的正确性。
 \begin{itemize}[nosep, topsep=\intraProjectListTopSep]
     \item \textbf{A2A 协议实现}：使用 JSON-RPC 2.0 构建 A2A 通信消息格式，支持 message/send（一次性返回）与 message/stream（流式逐步返回）两种消息模式；定义完整数据模型体系，包括信息模型（Agent 身份与能力描述）、消息模型（单轮/多轮对话消息传递）、任务模型（长时任务状态追踪与多次返回）
     \item \textbf{服务注册发现与意图路由}：实现注册中心，Agent 启动时主动注册元信息与能力标签，支持按标签快速查找与轮询负载均衡，后台心跳线程定期健康检查自动剔除故障节点；Orchestrator 接收用户请求后调用 LLM 进行意图识别，自动路由至对应 Agent 处理
@@ -130,7 +130,7 @@
 \section{\makebox[\widthof{\faTrophy}][c]{\color{CVBlue}\faTrophy}\ 荣誉奖项}
 \begin{itemize}[nosep]
     \item 美国大学生数学建模大赛 \hfill \textbf{国际二等奖}
-    \item "海信杯"第七届全国高校智能交通创新与创业大赛 \hfill \textbf{国家级一等奖}
+    \item 第七届全国高校智能交通创新与创业大赛 \hfill \textbf{国家级一等奖}
     \item 第 15 届中国大学生计算机设计大赛 \hfill \textbf{国家级三等奖}
     \item 第 16 届全国大学生数学竞赛 \hfill \textbf{省级一等奖}
 \end{itemize}
