@@ -37,20 +37,20 @@
     a4paper,
     left=0.85cm,
     right=0.85cm,
-    top=0.85cm,
-    bottom=0.65cm,
+    top=0.75cm,
+    bottom=0.50cm,
     nohead
 ]{geometry}
 
-\renewcommand{\baselinestretch}{1.03}
+\renewcommand{\baselinestretch}{1.00}
 
 \usepackage{titlesec}
 \setlist{noitemsep}
-\setlist[itemize]{topsep=0.04em, itemsep=0.02em, parsep=0em, partopsep=0em, leftmargin=*}
-\setlist[enumerate]{topsep=0.04em, itemsep=0.02em, parsep=0em, partopsep=0em, leftmargin=*}
+\setlist[itemize]{topsep=0.05em, itemsep=0.035em, parsep=0em, partopsep=0em, leftmargin=*}
+\setlist[enumerate]{topsep=0.05em, itemsep=0.035em, parsep=0em, partopsep=0em, leftmargin=*}
 
 \newlength{\interProjectSpacing}
-\setlength{\interProjectSpacing}{0.25em}
+\setlength{\interProjectSpacing}{0.28em}
 \newcommand{\projectsep}{\vspace{\interProjectSpacing}}
 
 \newlength{\intraProjectTitleSep}
@@ -65,25 +65,25 @@
 {}{0em}
 {}
 [{\color{CVBlue}\titlerule}]
-\titlespacing*{\section}{0cm}{*0.45}{*0.35}
+\titlespacing*{\section}{0cm}{*0.48}{*0.38}
 
 \begin{document}
 \pagenumbering{gobble}
 
 \begin{tikzpicture}[remember picture, overlay]
-    \node[anchor = north east] at ($(current page.north east)+(-1.55cm,-0.85cm)$) {\includegraphics[height=2.35cm]{avatar.jpg}};
+    \node[anchor = north east] at ($(current page.north east)+(-1.55cm,-0.80cm)$) {\includegraphics[height=2.25cm]{avatar.jpg}};
 \end{tikzpicture}%
 \begin{tikzpicture}[remember picture, overlay]
-    \node[anchor = north west] at ($(current page.north west)+(0.35cm,+0.75cm)$) {\includegraphics[height=4.8cm]{zju.png}};
+    \node[anchor = north west] at ($(current page.north west)+(0.35cm,+0.72cm)$) {\includegraphics[height=4.55cm]{zju.png}};
 \end{tikzpicture}%
 
-\vspace{-0.15cm}
+\vspace{-0.18cm}
 \centerline{\Large\bfseries{张宇航}}
 \vspace{0.08em}
 \centerline{\footnotesize{\faPhone\ 13098329363 \quad \faEnvelopeO\ \href{mailto:yuhang3.25@intl.zju.edu.cn}{yuhang3.25@intl.zju.edu.cn} \quad \faBriefcase\ 求职意向：\textbf{C++开发工程师}}}
 
-\vspace{-0.15em}
-{\fontsize{9.2pt}{10.2pt}\selectfont
+\vspace{-0.12em}
+{\fontsize{8.9pt}{10.45pt}\selectfont
 
 \section{\makebox[\widthof{\faGraduationCap}][c]{\color{CVBlue}\faGraduationCap}\ 教育经历}
 
@@ -111,39 +111,31 @@
 
 \section{\makebox[\widthof{\faUsers}][c]{\color{CVBlue}\faUsers}\ 项目经历}
 
-\textbf{项目一：MindBridge / mental-agent-runtime：C++ 多智能体心理健康 Agent Runtime} \titlebreak
+\textbf{项目一：MindBridge / mental-agent-runtime：C++ 多智能体心理健康 Agent Runtime} \hfill 2026.02 -- 2026.05 \titlebreak
 
 \textbf{项目描述：}
 本项目是面向心理健康咨询场景的 C++ 多智能体运行时系统，用户通过 Web 前端发起文本、语音或图片咨询请求，系统由 Gateway、Orchestrator、Counselor、Evaluator、Benchmark、Platform 等服务组成。Gateway 负责统一入口、鉴权上下文注入和流式响应转发；Orchestrator 基于 RiskPolicy 和多模态情绪先验进行意图识别与风险分流；Counselor 负责 Agentic RAG 咨询生成、会话历史融合和记忆写入；高风险请求触发 Evaluator 兜底评估，并通过 MCP Email/Excel 工具完成告警和咨询记录；session/end 时生成阶段性心理状态评估，形成可审计、可评测的心理咨询 Agent 闭环。
 
-\vspace{0.08em}
+\vspace{0.12em}
 \textbf{项目主要内容：}
 \begin{enumerate}
     \item 基于 C++17 和 Boost.Asio/Beast 实现异步 HTTP/SSE/WebSocket 通信层，支持多 worker、请求超时、断连保护和统一错误格式，用于支撑 Web 端流式咨询、多模态上传、语音接口和运行态查询。
-
     \item 将自研 C++ A2A/JSON-RPC 通信层落地到 MindBridge 多 Agent 链路，统一使用 JSON-RPC 2.0 消息格式传递 Agent 请求；Gateway 负责封装 Web 咨询请求并注入用户作用域 contextId、request\_id，咨询链路支持同步与流式转发，风险评估链路通过 \texttt{message/send} 将会话上下文投递给 Evaluator，保证跨 Agent 调用中的消息结构一致、会话标识连续和流式事件可透传。
-
     \item 设计 Agentic RAG 咨询链路：Counselor 先通过模型推理判断用户意图、生成检索 query 并决定是否需要检索；仅在咨询/高风险场景触发知识库召回，将心理健康知识片段与最近会话历史融合进 Prompt，并通过回复校验和失败重试机制提升回答相关性与安全边界。
-
     \item 实现 MCP 工具协议接入：通过 STDIO 拉起 MCP Server，并基于 JSON-RPC \texttt{tools/call} 调用插件化工具；将 Email 告警为 \texttt{mcp\_email\_alert}，接入 Evaluator/Counselor 主链路，统一完成参数校验、权限控制、结构化返回和 trace 审计，保证高风险告警与咨询记录可控、可追踪。
-
     \item 构建 Agent Harness 治理链路，将 Prompt 约束、上下文构建、模型调用、RAG/记忆注入、MCP/多模态/语音工具调用和运行审计统一收敛到 AgentLoop；工具执行统一经过 schema 校验、重复调用拦截、权限判断、pre/post Hook、配额控制和JSONL trace，保证模型只负责推理，外部动作由 Runtime 治理。
-
     \item 设计会话状态管理模块，持久化用户对话、风险记录、历史上下文和运行产物引用，解决多轮咨询中刷新页面、服务重启导致的上下文丢失问题；按用户、会话和状态类型隔离数据，避免多用户会话串扰；并实现主写从同步和历史回放能力，支持从节点增量追赶，保证前端历史、Agent 记忆和副本状态一致。
-
     \item 设计云存储产物链路，引入 FastDFS 存储文件内容，MySQL 维护文件元数据、用户文件列表和引用关系，Redis 缓存上传会话和分片进度；实现 md5 秒传、分片上传、文件合并、文件列表和下载能力，并将上传附件与用户、会话和 run 关联，便于后续审计和回放。
-
     \item 引入 eBPF 边界观测能力，将 Agent trace 与进程、文件、网络、stdio、TLS 和资源事件进行 run 级关联，生成边界观测报告，用于定位模型请求、工具调用和系统行为之间的因果关系。
-
     \item 建立 Benchmark与k8s部署，提供 Gateway、Orchestrator、Counselor、Evaluator、Platform、Frontend 的 K8s Deployment/StatefulSet/Service 配置；PsychoBench 在 85 个心理咨询场景、7 个评分维度下评估，MindBridge theta=0.442，相比 qwen-raw theta=0.415 提升约 6.4\%，平均 Judge 分数 8.888。
 \end{enumerate}
 
 \projectsep
 
-\textbf{项目二：建筑机器人-大模型Agent模块} \titlebreak
+\textbf{项目二：建筑机器人-大模型Agent模块} \hfill 2025.10 -- 2026.04 \titlebreak
 \textbf{项目描述：}设计机器人在线/离线双模式智能语音交互Agent系统，实现从语音输入到 FunctionCall 指令的端到端低延迟优化，端到端延迟在线版本 \textless{}2.5s，离线版本 \textless{}3.5s。
 
-\vspace{0.08em}
+\vspace{0.12em}
 \textbf{主要工作：}
 
 \textbf{机器人端侧在线大模型Agent方案}
