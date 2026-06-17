@@ -42,32 +42,30 @@
     nohead
 ]{geometry}
 
-\renewcommand{\baselinestretch}{1.22}
+\renewcommand{\baselinestretch}{1.18}
 
 \usepackage{titlesec}
-\usepackage{enumitem}
 \setlist{noitemsep}
-\setlist[itemize]{topsep=0.15em, leftmargin=*}
-\setlist[enumerate]{topsep=0.15em, leftmargin=*}
+\setlist[itemize]{topsep=0.12em, leftmargin=*}
+\setlist[enumerate]{topsep=0.12em, leftmargin=*}
 
 \newlength{\interProjectSpacing}
-\setlength{\interProjectSpacing}{0.55em}
+\setlength{\interProjectSpacing}{0.45em}
 \newcommand{\projectsep}{\vspace{\interProjectSpacing}}
 
 \newlength{\intraProjectTitleSep}
-\setlength{\intraProjectTitleSep}{0.25em}
+\setlength{\intraProjectTitleSep}{0.18em}
 \newcommand{\titlebreak}{\\[\intraProjectTitleSep]}
 
 \newlength{\intraProjectListTopSep}
-\setlength{\intraProjectListTopSep}{0.1em}
+\setlength{\intraProjectListTopSep}{0.08em}
 
 \titleformat{\section}
 {\large\bfseries\raggedright}
 {}{0em}
 {}
 [{\color{CVBlue}\titlerule}]
-\titlespacing*{\section}{0cm}{*1.0}{*0.9}
-
+\titlespacing*{\section}{0cm}{*0.85}{*0.65}
 
 \begin{document}
 \pagenumbering{gobble}
@@ -82,67 +80,89 @@
 \vspace{0cm}
 \centerline{\LARGE\bfseries{张宇航}}
 \vspace{0.2em}
-\centerline{\normalsize{\faPhone\ 130-9832-9363 \quad \faEnvelopeO\ \href{mailto:yuhang3.25@intl.zju.edu.cn}{yuhang3.25@intl.zju.edu.cn} \quad \faBriefcase\ 求职意向：\textbf{C++开发工程师}}}
-
+\centerline{\normalsize{\faPhone\ 13098329363 \quad \faEnvelopeO\ \href{mailto:yuhang3.25@intl.zju.edu.cn}{yuhang3.25@intl.zju.edu.cn} \quad \faBriefcase\ 求职意向：\textbf{C++开发工程师}}}
 
 \section{\makebox[\widthof{\faGraduationCap}][c]{\color{CVBlue}\faGraduationCap}\ 教育经历}
 
-\noindent\makebox[6.0cm][l]{\textbf{浙江大学}（985/C9）}%
-\makebox[3.5cm][l]{国际联合学院}%
-\makebox[2.8cm][l]{结构工程}%
-工学硕士 \hfill 2025.09 -- 至今
+\noindent\makebox[5.2cm][l]{\textbf{浙江大学}}%
+\makebox[4.4cm][l]{国际联合学院}%
+\hfill 2025.09 -- 至今
 \begin{itemize}[nosep, topsep=0.1em]
     \item 主修课程：具身智能，人工智能算法与系统，人工智能理论和高级应用，AI 赋能：创新思维引领下的产品设计
 \end{itemize}
-\vspace{0.3em}
-\noindent\makebox[6.0cm][l]{\textbf{长安大学}（211/双一流学科）}%
-\makebox[3.5cm][l]{未来交通学院}%
-\makebox[2.8cm][l]{土木工程}%
-工学学士 \hfill 2021.09 -- 2025.06
 
+\vspace{0.25em}
+\noindent\makebox[5.2cm][l]{\textbf{长安大学}}%
+\makebox[4.4cm][l]{未来交通学院}%
+\hfill 2021.09 -- 2025.06
 
-\section{\makebox[\widthof{\faUsers}][c]{\color{CVBlue}\faUsers}\ 项目经历}
-
-% --- 项目一 ---
-\textbf{全离线 RAG 智能座舱语音交互系统} \hfill 2024.XX -- 2024.XX \titlebreak
-项目简介：针对无网络环境（车载/工业场景），设计并实现全离线智能语音交互系统。采用微服务架构将 ASR、RAG、LLM、TTS 四个模块解耦为独立进程，通过 ZeroMQ 异步通信实现语音输入→知识检索→大模型推理→语音播报的完整闭环。
-\begin{itemize}[nosep, topsep=\intraProjectListTopSep]
-    \item \textbf{流式 ASR}：集成 Sherpa-ONNX + Zipformer 流式模型，基于 PortAudio 异步回调采集音频；调整 VAD 端点检测阈值（默认 1.2s→0.4s）降低首响应时延；设计 ASR-TTS 互斥机制避免 TTS 播报时的回声误触发
-    \item \textbf{端侧 RAG}：通过 Pybind11 嵌入 Python 调用 text2vec 实现向量检索；部署规则引擎进行查询分类（紧急/事实/创意），紧急指令直通知识库跳过 LLM 推理实现快速响应
-    \item \textbf{LLM 推理}：基于 Ollama 部署 DeepSeek-R1 1.5B（Q4 量化）模型，通过 libcurl 调用 HTTP Streaming API 实现流式推理；设计按中文标点分句的伪流式传输协议，每完成一句立即发送 TTS，降低用户感知的首句等待时间
-    \item \textbf{并发 TTS}：基于生产者-消费者模型构建文本/音频双缓冲队列，将语音合成与音频播放分离到独立线程实现流水线并行，消除 LLM 逐句输出时的语音卡顿
-    \item \textbf{通信与工程化}：封装 ZeroMQ REQ-REP 为三层继承体系（基类 + Server/Client），四模块独立进程实现故障隔离；全程 RAII + unique\_ptr 管理资源，CMake 统一构建多模块依赖
-\end{itemize}
-
-\projectsep
-
-% --- 项目二 ---
-\textbf{基于 A2A 协议的 C++ 多 Agent 通信 SDK} \hfill 2025.10 -- 2025.12 \titlebreak
-项目简介：基于 C++ 独立实现 Google A2A（Agent-to-Agent）协议的完整 SDK，利用阿里百炼平台提供的 Agent 构建多 Agent 通信系统验证协议准确性。同时利用 Redis 分布式存储对话历史保证上下文记忆，通过 tcpdump 抓包分析验证通信流程与协议格式的正确性。
-\begin{itemize}[nosep, topsep=\intraProjectListTopSep]
-    \item \textbf{A2A 协议实现}：使用 JSON-RPC 2.0 构建 A2A 通信消息格式，支持 message/send（一次性返回）与 message/stream（流式逐步返回）两种消息模式；定义完整数据模型体系，包括信息模型（Agent 身份与能力描述）、消息模型（单轮/多轮对话消息传递）、任务模型（长时任务状态追踪与多次返回）
-    \item \textbf{服务注册发现与意图路由}：实现注册中心，Agent 启动时主动注册元信息与能力标签，支持按标签快速查找与轮询负载均衡，后台心跳线程定期健康检查自动剔除故障节点；Orchestrator 接收用户请求后调用 LLM 进行意图识别，自动路由至对应 Agent 处理
-    \item \textbf{Client/Server 分层接口}：a2a\_client 提供客户端 API，支持同步/异步消息发送与 SSE 流式轮询；a2a\_server 提供任务生命周期管理与状态追踪存储，定义 ITaskStore 抽象接口并基于 Redis 扩展实现分布式 TaskStore，支持跨进程对话历史共享与上下文记忆
-    \item \textbf{多 Agent 编排落地}：基于阿里百炼平台部署 Orchestrator 与 Math Agent 为独立进程，完成"用户请求→意图识别→服务发现→Agent 调用→结果存储→返回用户"完整闭环；通过 contextId 实现跨进程多轮对话上下文连续推理
-\end{itemize}
-
-
-\section{\makebox[\widthof{\faTrophy}][c]{\color{CVBlue}\faTrophy}\ 荣誉奖项}
-\begin{itemize}[nosep]
+\vspace{0.35em}
+\textbf{荣誉奖项}
+\begin{itemize}[nosep, topsep=0.1em]
     \item 美国大学生数学建模大赛 \hfill \textbf{国际二等奖}
     \item 第七届全国高校智能交通创新与创业大赛 \hfill \textbf{国家级一等奖}
     \item 第 15 届中国大学生计算机设计大赛 \hfill \textbf{国家级三等奖}
     \item 第 16 届全国大学生数学竞赛 \hfill \textbf{省级一等奖}
 \end{itemize}
 
+\section{\makebox[\widthof{\faBriefcase}][c]{\color{CVBlue}\faBriefcase}\ 实习经历}
+
+\textbf{海康威视} \quad 国际业务部/基础架构组 \hfill 2026.03 -- 2026.06
+\begin{enumerate}[nosep, topsep=\intraProjectListTopSep]
+    \item 负责搭建 ELK 日志分析与告警平台，完成 Filebeat/Logstash 采集链路、Grok 日志解析、Elasticsearch 索引入库与 Kibana 检索配置，并基于配置 VSM 主从频率一致性告警规则，实现异常频率差值自动检测和邮件告警通知
+    \item 负责 BeeBase 图片内存池改造，将原固定 block 池升级为基于 boost::pool 的自适应池管理方案，引入按机器物理内存分档的 NodePool 容量策略、shared\_ptr 图片块自动回收、空闲池定时巡检释放和组件维度统计，降低图片频繁 malloc/free 的分配抖动和高峰后内存长期占用风险。
+    \item 重构 BeeNet 网络库日志追踪体系，引入 GUID 替代循环复用的 session\_id，在连接/请求入口绑定 GUID、连接类型和协议类型，并通过 RAII Guard 自动恢复日志上下文，将长/短连接、客户端/服务端日志自动路由至 4 类独立 log4cxx 滚动日志文件，提升问题定位效率。
+    \item 优化认证模块强制下线流程，扩展会话关闭链路的票据删除控制能力，区分权限变更与密码修改、多点登录冲突等踢出场景，保留 APP/CS 客户端记住密码票据，实现权限变更后免密重新登录。
+\end{enumerate}
+
+\section{\makebox[\widthof{\faUsers}][c]{\color{CVBlue}\faUsers}\ 项目经历}
+
+\textbf{项目一：MindBridge / mental-agent-runtime：C++ 多智能体心理健康 Agent Runtime} \titlebreak
+
+\textbf{项目描述：}
+本项目是面向心理健康咨询场景的 C++ 多智能体运行时系统，用户通过 Web 前端发起文本、语音或图片咨询请求，系统由 Gateway、Orchestrator、Counselor、Evaluator、Benchmark、Platform 等服务组成。Gateway 负责统一入口、鉴权上下文注入和流式响应转发；Orchestrator 基于 RiskPolicy 和多模态情绪先验进行意图识别与风险分流；Counselor 负责 Agentic RAG 咨询生成、会话历史融合和记忆写入；高风险请求触发 Evaluator 兜底评估，并通过 MCP Email/Excel 工具完成告警和咨询记录；session/end 时生成阶段性心理状态评估，形成可审计、可评测的心理咨询 Agent 闭环。
+
+\vspace{0.25em}
+\textbf{项目主要内容：}
+\begin{enumerate}[nosep, topsep=\intraProjectListTopSep]
+    \item 基于 C++17 和 Boost.Asio/Beast 实现异步 HTTP/SSE/WebSocket 通信层，支持多 worker、请求超时、断连保护和统一错误格式，用于支撑 Web 端流式咨询、多模态上传、语音接口和运行态查询。
+    \item 实现 A2A/JSON-RPC Agent 通信适配，将前端咨询请求统一封装为 \texttt{message/send}、\texttt{message/stream} 任务消息，维护 contextId、taskId、消息体、流式事件和错误码映射；服务间调用支持健康检测、熔断恢复和基于会话的一致性路由，保证多 Agent 链路稳定转发。
+    \item 设计 Agentic RAG 咨询链路：Counselor 先通过模型推理判断用户意图、生成检索 query 并决定是否需要检索；仅在咨询/高风险场景触发知识库召回，将心理健康知识片段与最近会话历史融合进 Prompt，并通过回复校验和失败重试机制提升回答相关性与安全边界。
+    \item 实现 MCP 工具协议接入：通过 STDIO 拉起 MCP Server，并基于 JSON-RPC \texttt{tools/call} 调用插件化工具；将 Email 告警为 \texttt{mcp\_email\_alert}，接入 Evaluator/Counselor 主链路，统一完成参数校验、权限控制、结构化返回和 trace 审计，保证高风险告警与咨询记录可控、可追踪。
+    \item 构建 Agent Harness 治理链路，将 Prompt 约束、上下文构建、模型调用、RAG/记忆注入、MCP/多模态/语音工具调用和运行审计统一收敛到 AgentLoop；工具执行统一经过 schema 校验、重复调用拦截、权限判断、pre/post Hook、配额控制和 JSONL trace，保证模型只负责推理，外部动作由 Runtime 治理。
+    \item 设计会话状态管理模块，持久化用户对话、风险记录、历史上下文和运行产物引用，解决多轮咨询中刷新页面、服务重启导致的上下文丢失问题；按用户、会话和状态类型隔离数据，避免多用户会话串扰；并实现主写从同步和历史回放能力，支持从节点增量追赶，保证前端历史、Agent 记忆和副本状态一致。
+    \item 设计云存储产物链路，引入 FastDFS 存储文件内容，MySQL 维护文件元数据、用户文件列表和引用关系，Redis 缓存上传会话和分片进度；实现 md5 秒传、分片上传、文件合并、文件列表和下载能力，并将上传附件与用户、会话和 run 关联，便于后续审计和回放。
+    \item 引入 eBPF 边界观测能力，将 Agent trace 与进程、文件、网络、stdio、TLS 和资源事件进行 run 级关联，生成边界观测报告，用于定位模型请求、工具调用和系统行为之间的因果关系。
+    \item 建立 Benchmark与k8s部署，提供 Gateway、Orchestrator、Counselor、Evaluator、Platform、Frontend 的 K8s Deployment/StatefulSet/Service 配置；PsychoBench 在 85 个心理咨询场景、7 个评分维度下评估，MindBridge theta=0.442，相比 qwen-raw theta=0.415 提升约 6.4\%，平均 Judge 分数 8.888。
+\end{enumerate}
+
+\projectsep
+
+\textbf{项目二：建筑机器人-大模型Agent模块} \titlebreak
+\textbf{项目描述：}设计机器人在线/离线双模式智能语音交互Agent系统，实现从语音输入到 FunctionCall 指令的端到端低延迟优化，端到端延迟在线版本 <2.5s，离线版本 <3.5s。
+
+\vspace{0.25em}
+\textbf{主要工作：}
+
+\textbf{机器人端侧在线大模型Agent方案}
+\begin{enumerate}[nosep, topsep=\intraProjectListTopSep]
+    \item 实时语音识别ASR模块：设计实时流式语音识别、唤醒词检测、TTS播放期ASR抑制、音乐播放过滤机制，ASR流式时延 <400ms。
+    \item Qwen-LLM-TTS模块：设计对话记忆管理，实现记忆总结、记忆加载；设计系统提示词，实现角色定义、输出格式约束和 FunctionCall 服务集成；实现 LLM-TTS 全流式响应，LLM首token延迟 <1s，TTS延迟 <300ms。
+    \item FunctionCall指令遵循模块：实现自然语言->动作端到端转换，如去厨房、启动跟随；支持 LLM 与 TTS 并行、函数调用与回复并行；设计 FunctionExecutor 动态注册、映射查找、参数解析机制；集成 RK 外设 PWM/SPI，实现 LCD 表情、云台、跟随、导航等控制。
+\end{enumerate}
+
+\textbf{机器人端侧离线大模型Agent方案}
+\begin{enumerate}[nosep, topsep=\intraProjectListTopSep]
+    \item Qwen3-0.6B微调量化与端侧部署：构建机器人对话/指令混合数据集，实现指令->结构化输出；基于 LLaMA-Factory LoRA 微调增强领域指令遵循与泛化能力；采用 llama.cpp/GGUF 完成端侧部署，并使用 GGUF-Q8 权重量化，Decode 约 8.6 toks/s。
+    \item 离线语音交互链路优化：集成 ROS-Sherpa-onnx Zipformer 流式ASR，优化 endpoint 尾部静音阈值为 0.4s，ASR出句时延约 700ms；实现 llamacpp-ROS 伪流式转发，按特殊字符/中文标点切分响应文本，分段传输首响应时延降低约 50\%。
+    \item 离线FunctionCall与TTS模块：复用在线 FunctionExecutor，订阅 /llm/function\_call，实现自然语言->动作端到端转换，如去厨房、启动跟随；集成 ROS-SummerTTS 伪流式合成，设计消息/音频双缓冲队列，使 TTS 与 LLM 异步并行，端到端延迟 <3.5s。
+\end{enumerate}
 
 \section{\makebox[\widthof{\faCogs}][c]{\color{CVBlue}\faCogs}\ 专业技能}
 \begin{itemize}[nosep]
     \item 熟练掌握 C++ 11，熟悉面向对象三大特性、STL 常用容器，熟悉智能指针、RAII、右值引用与移动语义、Lambda 表达式等 Modern C++ 特性
     \item 熟悉 TCP/IP 协议栈，掌握 TCP 三次握手/四次挥手、TCP 与 UDP 区别、滑动窗口与拥塞控制；了解 IO 多路复用（select/poll/epoll）及 Socket 编程
     \item 熟悉 Linux 系统编程，理解进程与线程区别、虚拟内存机制、进程间通信方式
-    \item 了解 RAG（检索增强生成）技术，了解 Embedding 向量化、余弦相似度检索等相关实现
-    \item 了解设计模式（生产者-消费者、工厂模式、RAII、单例模式），有实际项目落地经验
 \end{itemize}
 
 \end{document}
